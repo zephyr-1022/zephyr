@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZEPHYR 李梓豪 | MODYSSEY</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
+            scroll-behavior: smooth;
+        }
+        /* 全局变量：李梓豪专属配色 */
+        :root {
+            --main-black: #0D0D0D;
+            --card-dark: #1A1A1A;
+            --accent-purple: #7E57C2; /* 专属应援主色 */
+            --light-gray: #E0E0E0;
+            --text-mute: #999;
+            --border-glow: linear-gradient(90deg, #7E57C2, #A78BFA);
+            --hover-shadow: 0 8px 25px rgba(126, 87, 194, 0.25);
+        }
+        body {
+            background-color: var(--main-black);
+            color: var(--light-gray);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        /* 导航栏样式 */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 999;
+            padding: 12px 4%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(126, 87, 194, 0.2);
+        }
+        .nav-logo {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--accent-purple);
+            letter-spacing: 1.5px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-links a {
+            color: var(--light-gray);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+        .nav-links a:hover {
+            color: var(--accent-purple);
+        }
+        /* 首页横幅样式 */
+        .hero-banner {
+            width: 100%;
+            height: 85vh;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url('lzh.jpg');
+
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 15px;
+            margin-top: 50px;
+        }
+        .hero-title {
+            font-size: 42px;
+            font-weight: 900;
+            background: var(--border-glow);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+        .hero-sub {
+            font-size: 16px;
+            color: var(--light-gray);
+            margin-bottom: 6px;
+            font-weight: 400;
+        }
+        .hero-slogan {
+            font-size: 15px;
+            color: var(--text-mute);
+            margin-bottom: 25px;
+            letter-spacing: 1.5px;
+        }
+        .hero-info {
+            font-size: 14px;
+            color: var(--light-gray);
+            margin-bottom: 30px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .hero-info span {
+            padding: 4px 10px;
+            border: 1px solid var(--accent-purple);
+            border-radius: 16px;
+        }
+        .quick-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .quick-btn {
+            padding: 10px 22px;
+            border: 1px solid var(--accent-purple);
+            background: transparent;
+            color: var(--light-gray);
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s ease;
+        }
+        .quick-btn:hover {
+            background: var(--accent-purple);
+            color: #fff;
+            box-shadow: var(--hover-shadow);
+        }
+        /* 通用模块样式 */
+        .section {
+            padding: 50px 4%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .section-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--light-gray);
+            text-align: center;
+            margin-bottom: 35px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            width: 50px;
+            height: 2.5px;
+            background: var(--accent-purple);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        .card-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: var(--card-dark);
+            border-radius: 14px;
+            overflow: hidden;
+            transition: 0.3s ease;
+            border: 1px solid transparent;
+        }
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--hover-shadow);
+            border-color: var(--accent-purple);
+        }
+        /* 适配B站16:9封面比例 - 作品专区卡片 */
+        .card img {
+            width: 100%;
+            aspect-ratio: 16/9; /* 核心：B站封面16:9比例，替代固定高度 */
+            object-fit: cover;
+        }
+        .card-body {
+            padding: 18px;
+        }
+        .card-title-sm {
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--light-gray);
+            margin-bottom: 6px;
+        }
+        .card-desc {
+            font-size: 13px;
+            color: var(--text-mute);
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+        .card-link {
+            color: var(--accent-purple);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        /* 个人资料板块样式 */
+        .about-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: center;
+        }
+        .about-basic {
+            flex: 1;
+            min-width: 280px;
+        }
+        .about-basic p {
+            font-size: 15px;
+            margin-bottom: 10px;
+            color: var(--light-gray);
+        }
+        .about-basic span {
+            color: var(--accent-purple);
+            font-weight: 600;
+            margin-right: 6px;
+        }
+        .about-story {
+            flex: 1;
+            min-width: 280px;
+            background: rgba(126, 87, 194, 0.08);
+            padding: 20px;
+            border-radius: 14px;
+        }
+        .about-story h3 {
+            color: var(--accent-purple);
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
+        .about-story p {
+            font-size: 14px;
+            color: var(--light-gray);
+            line-height: 1.8;
+        }
+        /* 动态&行程板块样式 */
+        .news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .news-item {
+            background: var(--card-dark);
+            padding: 16px;
+            border-radius: 12px;
+            border-left: 3px solid var(--accent-purple);
+        }
+        .news-date {
+            color: var(--accent-purple);
+            font-size: 13px;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+        .news-title {
+            font-size: 16px;
+            color: var(--light-gray);
+            margin-bottom: 5px;
+        }
+        .news-desc {
+            font-size: 13px;
+            color: var(--text-mute);
+        }
+        /* 个人音乐合集板块 - 原有样式 */
+        .music-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+            margin-bottom: 40px;
+        }
+        .music-card {
+            background: var(--card-dark);
+            border-radius: 14px;
+            padding: 18px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: 0.3s ease;
+            border: 1px solid transparent;
+        }
+        .music-card:hover {
+            border-color: var(--accent-purple);
+            box-shadow: var(--hover-shadow);
+        }
+        .music-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--accent-purple);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        .music-info h4 {
+            font-size: 16px;
+            color: var(--light-gray);
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+        .music-info p {
+            font-size: 12px;
+            color: var(--text-mute);
+            margin-bottom: 6px;
+        }
+        .music-link {
+            font-size: 12px;
+            color: var(--accent-purple);
+            text-decoration: none;
+        }
+        /* 核心：2行3列滑动卡片容器 - 保留动画，适配B站16:9 */
+        .card-slider {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            /* 2行3列核心布局 */
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px 20px; /* 行间距25px，列间距20px，保证悬浮不重叠 */
+            padding: 20px 0;
+        }
+        /* B站16:9封面卡片 - 改名slider-card避免冲突，保留所有动画 */
+        .slider-card {
+            width: 100%;
+            aspect-ratio: 16/9; /* 严格B站16:9封面比例，自适应宽度 */
+            background: linear-gradient(135deg, #7E57C2 0%, #A78BFA 100%);
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        /* 卡片封面图+标题 */
+        .slider-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://picsum.photos/id/1080/600/338') center/cover;
+            opacity: 0.85;
+            transition: opacity 0.4s ease;
+        }
+        .slider-card::after {
+            content: attr(data-title);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px;
+            background: rgba(0,0,0,0.7);
+            color: #fff;
+            font-size: 13px;
+            text-align: center;
+            z-index: 2;
+        }
+        /* 核心动画1：鼠标移入容器，所有卡片默认变暗缩小 */
+        .card-slider:hover .slider-card {
+            filter: brightness(0.3);
+            opacity: 0.5;
+            transform: scale(0.9);
+        }
+        /* 核心动画2：鼠标悬浮单张卡片，升起放大变亮，置顶显示 */
+        .slider-card:hover {
+            transform: translateY(-60px) scale(1.15) !important;
+            filter: brightness(1) !important;
+            opacity: 1 !important;
+            box-shadow: 0 20px 45px rgba(126, 87, 194, 0.6);
+            z-index: 10;
+        }
+        .slider-card:hover::before {
+            opacity: 1; /* 悬浮时封面图更清晰 */
+        }
+        /* 直拍指路板块样式 */
+        .direct-wrap {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .direct-box {
+            background: var(--card-dark);
+            border-radius: 14px;
+            padding: 22px;
+            border: 1px solid transparent;
+            transition: 0.3s ease;
+        }
+        .direct-box:hover {
+            border-color: var(--accent-purple);
+        }
+        .direct-box h3 {
+            color: var(--accent-purple);
+            font-size: 18px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .direct-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .direct-list li {
+            font-size: 14px;
+            color: var(--light-gray);
+        }
+        .direct-list li a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: 0.3s ease;
+        }
+        .direct-list li a:hover {
+            color: var(--accent-purple);
+        }
+        /* 页脚样式 */
+        footer {
+            background: #080808;
+            padding: 35px 4%;
+            text-align: center;
+            border-top: 1px solid rgba(126, 87, 194, 0.2);
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+        .footer-links a {
+            color: var(--light-gray);
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s ease;
+        }
+        .footer-links a:hover {
+            color: var(--accent-purple);
+        }
+        .footer-copy {
+            font-size: 13px;
+            color: var(--text-mute);
+        }
+        /* 响应式适配 - 全端优化 */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .hero-title {
+                font-size: 28px;
+                letter-spacing: 2px;
+            }
+            .section {
+                padding: 40px 15px;
+            }
+            .section-title {
+                font-size: 22px;
+            }
+            .hero-info {
+                gap: 8px;
+            }
+            .music-grid, .direct-wrap {
+                grid-template-columns: 1fr;
+            }
+            /* 平板端：卡片改为2列，缩小悬浮幅度 */
+            .card-slider {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px 15px;
+            }
+            .slider-card:hover {
+                transform: translateY(-40px) scale(1.1) !important;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero-banner {
+                height: 75vh;
+            }
+            .hero-title {
+                font-size: 24px;
+            }
+            /* 手机端：卡片改为1列，进一步缩小悬浮幅度 */
+            .card-slider {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .slider-card:hover {
+                transform: translateY(-30px) scale(1.08) !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 固定导航栏 -->
+    <nav>
+        <div class="nav-logo">ZEPHYR</div>
+        <div class="nav-links">
+            <a href="#home">首页</a>
+            <a href="#about">资料</a>
+            <a href="#works">作品</a>
+            <a href="#music">音乐</a>
+            <a href="#direct">直拍</a>
+            <a href="#news">动态</a>
+        </div>
+    </nav>
+
+    <!-- 1. 首页板块：第一印象 -->
+    <section class="hero-banner" id="home">
+        <h1 class="hero-title">ZEPHYR 李梓豪</h1>
+        <p class="hero-sub">MODYSSEY | BOYSTORY</p>
+        <p class="hero-slogan">快乐源泉·舞台强者 | 舞力全开·逐光而行</p>
+        <div class="hero-info">
+            <span>2004.10.22</span>
+            <span>天秤座</span>
+            <span>天津</span>
+            <span>MODYSSEY、BOYSTORY</span>
+            <span>代表emoji：🌰</span>
+        </div>
+        <div class="quick-links">
+            <a href="#music" class="quick-btn">音乐合集</a>
+            <a href="#direct" class="quick-btn">直拍指路</a>
+            <a href="#works" class="quick-btn">作品专区</a>
+            <a href="274.html" class="quick-btn">HAOshTag</a>
+        </div>
+    </section>
+
+    <!-- 2. 个人资料板块：About -->
+    <section class="section" id="about">
+        <h2 class="section-title">个人资料</h2>
+        <div class="about-wrap">
+            <div class="about-basic">
+                <p><span>本名：</span>李梓豪</p>
+                <p><span>英文名：</span>Zephyr / Zihao Li</p>
+                <p><span>韩语名：</span>리즈하오</p>
+                <p><span>日语名：</span>リズハオ</p>
+                <p><span>小名：</span>祺祺（qiqi）/李梓祺/栗子</p>
+                <p><span>生日：</span>2004.10.22 | 天秤座</p>
+                <p><span>籍贯：</span>天津</p>
+                <p><span>所属：</span>MODYSSEY、BOYSTORY</p>
+                <p><span>MBTI：</span>ENFP</p>
+                <p><span>语言：</span>中文、英文、韩文、日文</p>
+                <p><span>魅力point：</span>rap、跳舞、搞笑等，太多了说不清。</p>
+                <p><span>座右铭：</span>不能比粉丝先放弃。</p>
+            </div>
+            <div class="about-story">
+                <h3>成长历程</h3>
+                <p>3岁开始接触舞蹈，从小展现超强舞蹈天赋，深耕舞蹈多年，熟练掌握8种舞种；早年加入BOYSTORY开启演艺之路，凭借扎实舞台功底圈粉无数；后参加《Boys Planet》收获超高人气，最终加入MODYSSEY全新出发，兼顾舞台表现力与创作能力，是团内实力与活力担当，一路坚守热爱，稳步成长为全能偶像。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. 作品专区：Works（已适配B站16:9封面） -->
+    <section class="section" id="works">
+        <h2 class="section-title">作品专区</h2>
+        <div class="card-group">
+            <div class="card">
+                <img src="https://picsum.photos/id/1060/600/338" alt="MODYSSEY专辑">
+                <div class="card-body">
+                    <h3 class="card-title-sm">MODYSSEY 作品</h3>
+                    <p class="card-desc">团体专辑、单曲、主打歌舞台、歌词完整版</p>
+                    <a href="https://bilibili.com" target="_blank" class="card-link">B站查看 →</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://picsum.photos/id/1070/600/338" alt="BOYSTORY作品">
+                <div class="card-body">
+                    <h3 class="card-title-sm">BOYSTORY 作品</h3>
+                    <p class="card-desc">早期团体单曲、舞台、专辑合集</p>
+                    <a href="https://bilibili.com" target="_blank" class="card-link">B站查看 →</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://picsum.photos/id/1040/600/338" alt="综艺影视">
+                <div class="card-body">
+                    <h3 class="card-title-sm">综艺/影视</h3>
+                    <p class="card-desc">Boys Planet、采访、名场面、客串作品</p>
+                    <a href="https://bilibili.com" target="_blank" class="card-link">B站查看 →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. 个人音乐合集板块（核心：2行3列动画卡片） -->
+    <section class="section" id="music">
+        <h2 class="section-title">个人音乐合集</h2>
+        <div class="music-grid">
+            <div class="music-card">
+                <div class="music-icon">🎵</div>
+                <div class="music-info">
+                    <h4>个人单曲/翻唱</h4>
+                    <p>原创单曲、翻唱舞台、音频完整版</p>
+                    <a href="https://bilibili.com" target="_blank" class="music-link">B站直达 ↗</a>
+                </div>
+            </div>
+            <div class="music-card">
+                <div class="music-icon">🎤</div>
+                <div class="music-info">
+                    <h4>团体主打曲</h4>
+                    <p>MODYSSEY、BOYSTORY主打歌收录</p>
+                    <a href="https://bilibili.com" target="_blank" class="music-link">B站合集 ↗</a>
+                </div>
+            </div>
+            <div class="music-card">
+                <div class="music-icon">🎶</div>
+                <div class="music-info">
+                    <h4>舞台音源</h4>
+                    <p>竞赛舞台、cover舞台高清音源</p>
+                    <a href="https://bilibili.com" target="_blank" class="music-link">B站收录 ↗</a>
+                </div>
+            </div>
+            <div class="music-card">
+                <div class="music-icon">📀</div>
+                <div class="music-info">
+                    <h4>创作片段</h4>
+                    <p>个人原创demo、即兴创作片段</p>
+                    <a href="https://bilibili.com" target="_blank" class="music-link">B站查看 ↗</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2行3列动画卡片区域 - 音乐舞台直拍合集 -->
+        <h3 class="section-title" style="font-size: 20px; margin-top: 60px; margin-bottom: 30px;">音乐舞台直拍合集</h3>
+        <div class="card-slider">
+            <div class="slider-card" data-title="《XX主打歌》打歌直拍"></div>
+            <div class="slider-card" data-title="《Boys Planet》竞演直拍"></div>
+            <div class="slider-card" data-title="翻唱《XX》舞台直拍"></div>
+            <div class="slider-card" data-title="BOYSTORY时期经典舞台"></div>
+            <div class="slider-card" data-title="即兴舞蹈solo直拍"></div>
+            <div class="slider-card" data-title="粉丝见面会舞台直拍"></div>
+            <!-- 如需增加卡片，继续添加即可，网格会自动适配 -->
+        </div>
+    </section>
+
+    <!-- 5. 直拍指路板块 -->
+    <section class="section" id="direct">
+        <h2 class="section-title">直拍快捷指路</h2>
+        <div class="direct-wrap">
+            <div class="direct-box">
+                <h3>🔥 热门直拍合集</h3>
+                <ul class="direct-list">
+                    <li><a href="https://bilibili.com" target="_blank">Boys Planet 竞赛直拍</a></li>
+                    <li><a href="https://bilibili.com" target="_blank">MODYSSEY 打歌直拍</a></li>
+                    <li><a href="https://bilibili.com" target="_blank">BOYSTORY 舞台直拍</a></li>
+                    <li><a href="https://bilibili.com" target="_blank">签售/线下饭拍直拍</a></li>
+                </ul>
+            </div>
+            <div class="direct-box">
+                <h3>📱 平台直达</h3>
+                <ul class="direct-list">
+                    <li><a href="https://bilibili.com" target="_blank">B站高清直拍合集</a></li>
+                    <li><a href="#" target="_blank">微博饭拍汇总</a></li>
+                    <li><a href="#" target="_blank">抖音/快手直拍剪辑</a></li>
+                    <li><a href="#" target="_blank">官方直拍频道</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. 动态新闻：News -->
+    <section class="section" id="news">
+        <h2 class="section-title">最新动态</h2>
+        <div class="news-list">
+            <div class="news-item">
+                <div class="news-date">2026.XX.XX</div>
+                <h3 class="news-title">MODYSSEY 全新回归预告公开</h3>
+                <p class="news-desc">最新回归行程、舞台预告、签售会安排</p>
+            </div>
+            <div class="news-item">
+                <div class="news-date">2026.XX.XX</div>
+                <h3 class="news-title">个人舞蹈cover更新</h3>
+                <p class="news-desc">微博/抖音同步更新，B站高清舞台直拍释出</p>
+            </div>
+            <div class="news-item">
+                <div class="news-date">2026.XX.XX</div>
+                <h3 class="news-title">综艺录制行程公开</h3>
+                <p class="news-desc">B站独家播出，后续播出时间持续更新</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. 页脚社交链接 -->
+    <footer>
+        <div class="footer-links">
+            <a href="https://weibo.com/" target="_blank">微博：BOY STORY ZIHAO</a>
+            <a href="#" target="_blank">INS</a>
+            <a href="#" target="_blank">TikTok</a>
+            <a href="#" target="_blank">MODYSSEY官推</a>
+            <a href="https://bilibili.com" target="_blank">B站个人频道</a>
+        </div>
+        <p class="footer-copy">© 2026 ZEPHYR 李梓豪 专属主页 | 仅粉丝交流使用，非官方</p>
+    </footer>
+</body>
+</html>
