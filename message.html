@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>粉丝留言板</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,"Microsoft YaHei",sans-serif}
+body{background:#121212;color:#fff;padding:50px 20px;max-width:700px;margin:0 auto;}
+.head{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;}
+.back{color:#a855f7;font-size:16px;text-decoration:none;}
+.title{font-size:26px;text-align:center;margin-bottom:30px;}
+.box{display:flex;flex-direction:column;gap:15px;}
+input,textarea{width:100%;padding:14px;background:#1e1e1e;border:1px solid #333;border-radius:12px;color:#fff;font-size:16px;outline:none;}
+textarea{height:180px;resize:none;}
+button{padding:14px;background:#a855f7;color:#fff;border:none;border-radius:12px;font-size:18px;font-weight:bold;cursor:pointer;}
+#tip{text-align:center;margin-top:15px;font-size:15px;color:#fff;}
+.export-btn{background:#444;}
+</style>
+</head>
+
+<body>
+<div class="head">
+  <a href="index.html" class="back">← 返回主页</a>
+</div>
+
+<h1 class="title">💌 粉丝留言板</h1>
+
+<div class="box">
+  <input type="text" id="name" placeholder="请输入你的昵称">
+  <textarea id="content" placeholder="请输入你想说的话..."></textarea>
+  <button onclick="submitMsg()">提交留言</button>
+  <button class="export-btn" onclick="exportMsg()">导出留言（仅管理员）</button>
+  <p id="tip"></p>
+</div>
+
+<script>
+// ======================
+// 管理员密码（只有你知道）
+// ======================
+const ADMIN_PASSWORD = "lizihao123";
+
+// 提交留言（所有人可用）
+function submitMsg() {
+  let name = document.getElementById("name").value.trim();
+  let content = document.getElementById("content").value.trim();
+  let tip = document.getElementById("tip");
+
+  if (!name) { tip.textContent = "请填写昵称"; return; }
+  if (!content) { tip.textContent = "请填写留言内容"; return; }
+
+  let time = new Date().toLocaleString();
+  let msg = { name, content, time };
+
+  let list = JSON.parse(localStorage.getItem("fansMsg") || "[]");
+  list.push(msg);
+  localStorage.setItem("fansMsg", JSON.stringify(list));
+
+  tip.textContent = "✅ 留言提交成功！";
+  document.getElementById("name").value = "";
+  document.getElementById("content").value = "";
+}
+
+// 导出留言（必须密码正确）
+function exportMsg() {
+  let inputPwd = prompt("请输入管理员密码：");
+  if (inputPwd !== ADMIN_PASSWORD) {
+    alert("❌ 密码错误，无权导出留言！");
+    return;
+  }
+
+  let list = JSON.parse(localStorage.getItem("fansMsg") || "[]");
+  if (list.length === 0) {
+    alert("暂无留言");
+    return;
+  }
+
+  let csv = "昵称,留言内容,提交时间\n";
+  list.forEach(m => {
+    let content = m.content.replace(/,/g, " ").replace(/\n/g, " ");
+    csv += `${m.name},${content},${m.time}\n`;
+  });
+
+  // Excel 不乱码
+  let BOM = new Uint8Array([0xef, 0xbb, 0xbf]);
+  let blob = new Blob([BOM, csv], { type: "text/csv;charset=utf-8" });
+  let url = URL.createObjectURL(blob);
+  let a = document.createElement("a");
+  a.href = url;
+  a.download = "粉丝留言.csv";
+  a.click();
+}
+</script>
+</body>
+</html>
