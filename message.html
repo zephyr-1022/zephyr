@@ -2,19 +2,101 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
+<!-- 👇 这一行是手机适配的关键 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>粉丝留言板</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,"Microsoft YaHei",sans-serif}
-body{background:#121212;color:#fff;padding:50px 20px;max-width:700px;margin:0 auto;}
-.head{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;}
-.back{color:#a855f7;font-size:16px;text-decoration:none;}
-.title{font-size:26px;text-align:center;margin-bottom:30px;}
-.box{display:flex;flex-direction:column;gap:15px;}
-input,textarea{width:100%;padding:14px;background:#1e1e1e;border:1px solid #333;border-radius:12px;color:#fff;font-size:16px;outline:none;}
-textarea{height:180px;resize:none;}
-button{padding:14px;background:#a855f7;color:#fff;border:none;border-radius:12px;font-size:18px;font-weight:bold;cursor:pointer;}
-#tip{text-align:center;margin-top:15px;font-size:15px;color:#fff;}
-.export-btn{background:#444;}
+
+body{
+    background:#121212;
+    color:#fff;
+    padding:30px 16px; /* 手机边距更小 */
+    max-width:700px;
+    margin:0 auto;
+    min-height:100vh; /* 占满屏幕高度 */
+}
+
+.head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:24px;
+}
+
+.back{
+    color:#a855f7;
+    font-size:16px;
+    text-decoration:none;
+    padding:6px 0;
+}
+
+.title{
+    font-size:24px;
+    text-align:center;
+    margin-bottom:26px;
+}
+
+.box{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+input,textarea{
+    width:100%;
+    padding:14px 16px;
+    background:#1e1e1e;
+    border:1px solid #333;
+    border-radius:12px;
+    color:#fff;
+    font-size:16px;
+    outline:none;
+    -webkit-appearance:none;
+}
+
+textarea{
+    height:160px;
+    resize:none;
+}
+
+button{
+    padding:15px;
+    background:#a855f7;
+    color:#fff;
+    border:none;
+    border-radius:12px;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+    -webkit-appearance:none;
+}
+
+.export-btn{
+    background:#444;
+}
+
+#tip{
+    text-align:center;
+    margin-top:12px;
+    font-size:15px;
+    color:#fff;
+    min-height:20px;
+}
+
+/* 👇 手机更小屏优化 */
+@media (max-width:400px){
+    .title{
+        font-size:22px;
+    }
+    textarea{
+        height:140px;
+    }
+    button{
+        font-size:16px;
+        padding:14px;
+    }
+}
 </style>
 </head>
 
@@ -35,11 +117,11 @@ button{padding:14px;background:#a855f7;color:#fff;border:none;border-radius:12px
 
 <script>
 // ======================
-// 管理员密码（只有你知道）
+// 管理员密码
 // ======================
 const ADMIN_PASSWORD = "lizihao123";
 
-// 提交留言（所有人可用）
+// 提交留言
 function submitMsg() {
   let name = document.getElementById("name").value.trim();
   let content = document.getElementById("content").value.trim();
@@ -60,7 +142,7 @@ function submitMsg() {
   document.getElementById("content").value = "";
 }
 
-// 导出留言（必须密码正确）
+// 导出留言
 function exportMsg() {
   let inputPwd = prompt("请输入管理员密码：");
   if (inputPwd !== ADMIN_PASSWORD) {
@@ -80,7 +162,6 @@ function exportMsg() {
     csv += `${m.name},${content},${m.time}\n`;
   });
 
-  // Excel 不乱码
   let BOM = new Uint8Array([0xef, 0xbb, 0xbf]);
   let blob = new Blob([BOM, csv], { type: "text/csv;charset=utf-8" });
   let url = URL.createObjectURL(blob);
