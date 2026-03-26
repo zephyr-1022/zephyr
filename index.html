@@ -478,188 +478,321 @@
             .card-slider { grid-template-columns: repeat(2, 1fr); }
         }
 
-        @media (max-width: 600px) {
-            .nav-links { display: none; }
-            .card-slider { grid-template-columns: 1fr; }
-            .hero-title { font-size: 32px; }
-            .section { padding: 50px 20px; }
-            .about-wrap { padding: 25px; }
-        }
+         @media (max-width: 600px) {
+    .nav-links { display: none; }
+    /* 作品专区缩小 */
+    .card-group { gap: 12px; }
+    .card { transform: scale(0.92); }
+    /* HAOshTag 手机 2列 */
+    .card-slider { grid-template-columns: repeat(2, 1fr) !important; }
+    /* 👇 手机近期行程优化：不拥挤、不重叠 */
+    .news-item {
+        padding: 16px !important;
+        margin-bottom: 10px !important;
+        align-items: flex-start !important;
+    }
+    .news-date {
+        margin-top: 4px !important;
+    }
+    .hero-title { font-size: 32px; }
+    .section { padding: 50px 20px; }
+    .about-wrap { padding: 25px; }
+}
+        
     </style>
 </head>
 <body>
-    <div class="bg-glow" style="top: 10%; left: -10%;"></div>
-    <div class="bg-glow" style="bottom: 10%; right: -10%; background: #00D2FF;"></div>
+  <div class="bg-glow" style="top: 10%; left: -10%;"></div>
+  <div class="bg-glow" style="bottom: 10%; right: -10%; background: #00D2FF;"></div>
 
-    <nav>
-        <div class="nav-logo">ZEPHYR</div>
-        <div class="nav-links">
-            <a href="#home">首页</a>
-            <a href="#about">资料</a>
-            <a href="#works">作品</a>
-            <a href="#music">舞台</a>
-            <a href="#direct">直拍</a>
-            <a href="#news">动态</a>
-        </div>
-    </nav>
+  <nav>
+    <div class="nav-logo">ZEPHYR</div>
+    <div class="nav-links">
+      <a href="#home">首页</a>
+      <a href="#about">资料</a>
+      <a href="#works">作品</a>
+      <a href="#music">舞台</a>
+      <a href="#direct">直拍</a>
+      <a href="#news">动态</a>
+      <a href="#news-item">行程</a>
+    </div>
+  </nav>
 
-    <section class="hero-banner" id="home">
-        <p class="hero-sub">MODYSSEY | BOYSTORY</p>
-        <h1 class="hero-title">ZEPHYR 李梓豪</h1>
-        
-        <div class="hero-info">
-            <span>2004.10.22</span>
-            <span>天秤座</span>
-            <span>天津</span>
-            <span>ENFP</span>
-            <span>🌰栗子</span>
-        </div>
-        <div class="quick-links">
-            <a href="#music" class="quick-btn">HAOshTag</a>
-            <a href="#direct" class="quick-btn">直拍指路</a>
-            <a href="#works" class="quick-btn">舞台专区</a>
-        </div>
-    </section>
+  <section class="hero-banner" id="home">
+    <p class="hero-sub">MODYSSEY | BOYSTORY</p>
+    <h1 class="hero-title">ZEPHYR 李梓豪</h1>
+    <div class="hero-info">
+      <span>2004.10.22</span>
+      <span>天秤座</span>
+      <span>天津</span>
+      <span>ENFP</span>
+      <span>🌰栗子</span>
+    </div>
+    <div class="quick-links">
+      <a href="#music" class="quick-btn">HAOshTag</a>
+      <a href="#direct" class="quick-btn">直拍指路</a>
+      <a href="#works" class="quick-btn">舞台专区</a>
+    </div>
+  </section>
 
-    <section class="section" id="about">
-        <h2 class="section-title">个人资料</h2>
-        <div class="about-wrap">
-            <div class="about-basic">
-                <p><span>本名：</span>李梓豪</p>
-                <p><span>英文名：</span>Zephyr / Zihao Li</p>
-                <p><span>小名：</span>祺祺 / 栗子</p>
-                <p><span>生日：</span>2004.10.22 | 天秤座</p>
-                <p><span>籍贯：</span>天津</p>
-                <p><span>所属：</span>MODYSSEY、BOYSTORY</p>
-                <p><span>MBTI：</span>ENFP</p>
-                <p><span>语言：</span>中文、英文、韩文、日文</p>
-                <p><span>座右铭：</span>不能比粉丝先放弃。</p>
-            </div>
-            <div class="about-story">
-                <h3>成长历程</h3>
-                <p>3岁开始接触舞蹈，从小展现超强舞蹈天赋，深耕舞蹈多年，熟练掌握8种舞种；早年加入BOYSTORY开启演艺之路，凭借扎实舞台功底圈粉无数；后参加《Boys Planet》收获超高人气，最终加入MODYSSEY全新出发，兼顾舞台表现力与创作能力，是团内实力与活力担当，一路坚守热爱，稳步成长为全能偶像。</p>
-            </div>
-        </div>
-    </section>
+  <section class="section" id="about">
+    <h2 class="section-title">个人资料</h2>
+    <div class="about-wrap">
+      <div class="about-basic">
+        <p><span>本名：</span>李梓豪</p>
+        <p><span>英文名：</span>Zephyr / Zihao Li</p>
+        <p><span>小名：</span>祺祺 / 栗子</p>
+        <p><span>生日：</span>2004.10.22 | 天秤座</p>
+        <p><span>籍贯：</span>天津</p>
+        <p><span>所属：</span>MODYSSEY、BOYSTORY</p>
+        <p><span>MBTI：</span>ENFP</p>
+        <p><span>语言：</span>中文、英文、韩文、日文</p>
+        <p><span>座右铭：</span>不能比粉丝先放弃。</p>
+      </div>
+      <div class="about-story">
+        <h3>成长历程</h3>
+        <p>3岁开始接触舞蹈，从小展现超强舞蹈天赋，深耕舞蹈多年，熟练掌握8种舞种；早年加入BOYSTORY开启演艺之路，凭借扎实舞台功底圈粉无数；后参加《Boys Planet》收获超高人气，最终加入MODYSSEY全新出发，兼顾舞台表现力与创作能力，是团内实力与活力担当，一路坚守热爱，稳步成长为全能偶像。</p>
+      </div>
+    </div>
+  </section>
 
-    <section class="section" id="works">
-        <h2 class="section-title">作品专区</h2>
-        <div class="card-group">
-            <div class="card" onclick="window.open('https://space.bilibili.com/','_blank')">
-                <img src="https://picsum.photos/id/1080/600/338" alt="作品封面">
-                <div class="card-body">
-                    <h3 class="card-title-sm">MODYSSEY 主打舞台</h3>
-                    <p class="card-desc">官方舞台 / 高清完整版</p>
-                    <a href="https://space.bilibili.com/" target="_blank" class="card-link">前往观看 →</a>
-                </div>
-            </div>
-            <div class="card" onclick="window.open('https://space.bilibili.com/','_blank')">
-                <img src="https://picsum.photos/id/1080/600/338" alt="作品封面">
-                <div class="card-body">
-                    <h3 class="card-title-sm">舞蹈 Cover 合集</h3>
-                    <p class="card-desc">翻跳精选 / 实力展现</p>
-                    <a href="https://space.bilibili.com/" target="_blank" class="card-link">前往观看 →</a>
-                </div>
-            </div>
-            <div class="card" onclick="window.open('https://space.bilibili.com/','_blank')">
-                <img src="https://picsum.photos/id/1080/600/338" alt="作品封面">
-                <div class="card-body">
-                    <h3 class="card-title-sm">原创编舞作品</h3>
-                    <p class="card-desc">个人编舞 / 练习室版</p>
-                    <a href="https://space.bilibili.com/" target="_blank" class="card-link">前往观看 →</a>
-                </div>
-            </div>
+  <section class="section" id="works">
+    <h2 class="section-title">作品专区</h2>
+    <div class="card-group">
+      <div class="card" onclick="goBilibili('https://space.bilibili.com/','bilibili://space/你的UID')">
+        <img src="https://picsum.photos/id/1080/600/338" alt="作品封面">
+        <div class="card-body">
+          <h3 class="card-title-sm">MODYSSEY 主打舞台</h3>
+          <p class="card-desc">官方舞台 / 高清完整版</p>
+          <div class="card-link">前往观看 →</div>
         </div>
-    </section>
+      </div>
+      <div class="card" onclick="goBilibili('https://space.bilibili.com/','bilibili://space/你的UID')">
+        <img src="https://picsum.photos/id/1080/600/338" alt="作品封面">
+        <div class="card-body">
+          <h3 class="card-title-sm">舞蹈 Cover 合集</h3>
+          <p class="card-desc">翻跳精选 / 实力展现</p>
+          <div class="card-link">前往观看 →</div>
+        </div>
+      </div>
+      <div class="card" onclick="goBilibili('https://space.bilibili.com/','bilibili://space/你的UID')">
+        <img src="https://picsum.photos/id/1080/600/338" alt="作品封面">
+        <div class="card-body">
+          <h3 class="card-title-sm">原创编舞作品</h3>
+          <p class="card-desc">个人编舞 / 练习室版</p>
+          <div class="card-link">前往观看 →</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <section class="section" id="music">
+  <section class="section" id="music">
     <h2 class="section-title">HAOshTag</h2>
     <div class="card-slider">
-        <a class="slider-card" href=" " target="_blank" 
-           style="background-image: url('name1.jpg');">
-            <div class="card-caption">Mixtape Track.01 《那么近那么远》</div>
-        </a >
-        <a class="slider-card" href="https://www.bilibili.com/" target="_blank" 
-           style="background-image: url('lu2.jpg');">
-            <div class="card-caption">#HAOshTag Mixtape Track.01 《那么近那么远》</div>
-        </a >
-        <a class="slider-card" href="https://www.bilibili.com/" target="_blank" 
-           style="background-image: url('love3.jpg');">
-            <div class="card-caption">Mixtape Track.03 《爱=LOVE SICK》</div>
-        </a >
-        <a class="slider-card" href="https://www.bilibili.com/" target="_blank" 
-           style="background-image: url('king4.jpg');">
-            <div class="card-caption">Mixtape Track.04《K1ng in this R00M》</div>
-        </a >
-        <a class="slider-card" href="https://www.bilibili.com/" target="_blank" 
-           style="background-image: url('luv.jpg');">
-            <div class="card-caption">Mixtape Track.05《Luv Urself》</div>
-        </a >
-        <a class="slider-card" href="https://www.bilibili.com/" target="_blank" 
-           style="background-image: url('xue6.jpg');">
-            <div class="card-caption">Mixtape Track.06《雪 Snow》</div>
-        </a >
+      <a class="slider-card" href="javascript:goBilibili('https://www.bilibili.com/video/BV1Xh4y1t7ZJ/','https://b23.tv/nVRwyDj');" style="background-image: url('name1.jpg');">
+        <div class="card-caption">Mixtape Track.01 《那么近那么远》</div>
+      </a>
+      <a class="slider-card" href="javascript:goBilibili('https://www.bilibili.com/video/BV1nc411u7XX/','https://b23.tv/VTNycRO');" style="background-image: url('lu2.jpg');">
+        <div class="card-caption">Mixtape Track.02 《鲁伯特之泪》</div>
+      </a>
+      <a class="slider-card" href="javascript:goBilibili('https://www.bilibili.com/video/BV1qx4y1d7bX/?',' https://b23.tv/oDybAZZ');" style="background-image: url('love3.jpg');">
+        <div class="card-caption">Mixtape Track.03 《爱=LOVE SICK》</div>
+      </a>
+      <a class="slider-card" href="javascript:goBilibili('https://www.bilibili.com/video/BV1kG411o7KV/','https://b23.tv/sdiQWcE');" style="background-image: url('king4.jpg');">
+        <div class="card-caption">Mixtape Track.04《K1ng in this R00M》</div>
+      </a>
+      <a class="slider-card" href="javascript:goBilibili('https://www.bilibili.com/video/BV1g34y1A7CU/','https://b23.tv/dNLKGXH');" style="background-image: url('luv.jpg');">
+        <div class="card-caption">Mixtape Track.05《Luv Urself》</div>
+      </a>
+      <a class="slider-card" href="javascript:goBilibili('https://www.bilibili.com/video/BV1qw411X7g6/?','https://b23.tv/yEje1xg');" style="background-image: url('xue6.jpg');">
+        <div class="card-caption">Mixtape Track.06《雪 Snow》</div>
+      </a>
     </div>
+  </section>
+
+  <section class="section" id="direct">
+    <h2 class="section-title">直拍指路</h2>
+    <div class="direct-wrap">
+      <div class="direct-box">
+        <h3>🔥 主打直拍</h3>
+        <ul class="direct-list">
+          <li><a href="javascript:goBilibili('网页链接','APP链接')">MODYSSEY 主打官方直拍</a></li>
+          <li><a href="javascript:goBilibili('网页链接','APP链接')">音乐银行直拍</a></li>
+          <li><a href="javascript:goBilibili('网页链接','APP链接')">人气歌谣直拍</a></li>
+        </ul>
+      </div>
+      <div class="direct-box">
+        <h3>⭐ 经典舞台</h3>
+        <ul class="direct-list">
+          <li><a href="javascript:goBilibili('网页链接','APP链接')">Boys Planet 直拍</a></li>
+          <li><a href="javascript:goBilibili('网页链接','APP链接')">Solo 舞蹈直拍</a></li>
+          <li><a href="javascript:goBilibili('网页链接','APP链接')">演唱会高清直拍</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+<section class="section" id="news">
+    <h2 class="section-title">最新动态</h2>
+    <div class="news-list">
+        <!-- 最新动态：保留跳转，可点击 -->
+        <div class="news-item" onclick="window.open('https://weibo.com/7414731552/5280686973914915','_blank')" style="cursor:pointer">
+            <div class="news-date">2026.03.26</div>
+            <div>
+                <div style="font-weight:bold">PlusChat更新</div>
+                <div style="font-size:13px; color:var(--text-mute)"></div>
+            </div>
+        </div>
+        <div class="news-item" onclick="window.open('https://weibo.com/2906715873/5280673944044576','_blank')" style="cursor:pointer">
+            <div class="news-date">2026.03.26</div>
+            <div>
+                <div style="font-weight:bold">𝟏.𝐆𝐨𝐭 𝐇𝐨𝐨𝐤𝐞𝐝: 𝐀𝐧 𝐀𝐝𝐝𝐢𝐜𝐭𝐢𝐯𝐞 𝐒𝐲𝐦𝐩𝐡𝐨𝐧𝐲</div>
+                <div style="font-size:13px; color:var(--text-mute)">Personal ID</div>
+            </div>
+        </div>
+        <!-- 之前新增的不可跳转动态 -->
+        <div class="news-item" style="cursor: default;">
+            <div class="news-date">2026.03.25</div>
+            <div>
+                <div style="font-weight:bold">官方物料拍摄花絮公开</div>
+                <div style="font-size:13px; color:var(--text-mute)">全新造型亮相，展现多面魅力</div>
+            </div>
+        </div>
+        <div class="news-item" style="cursor: default;">
+            <div class="news-date">2026.03.24</div>
+            <div>
+                <div style="font-weight:bold">音乐平台音源数据持续上涨</div>
+                <div style="font-size:13px; color:var(--text-mute)">多首歌曲进入榜单前列</div>
+            </div>
+        </div>
+    </div>
+
+<section class="section" id="news-item">
+<h2 class="section-title" style="margin-top: 70px;">近期行程</h2>
+<div class="news-list">
+  <div class="news-item" style="cursor: default;">
+    <div class="news-date">03-27</div>
+    <div>
+      <div style="font-weight:bold">SAY SAY MODYSSEY/第二集</div>
+      <div style="font-size:13px; color:var(--text-mute)">18:00 Ment首播/19:00 全平台同步上线</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="news-item" style="cursor: default;">
+    <div class="news-date">03-30</div>
+    <div>
+      <div style="font-weight:bold">Got Hooked：An Addicitive Symphony概念照2</div>
+      <div style="font-size:13px; color:var(--text-mute)">CST 23:00</div>
+    </div>
+  </div>
+
+  <div class="news-item" style="cursor: default;">
+    <div class="news-date">04-02</div>
+    <div>
+      <div style="font-weight:bold">MV预告1/曲目列表&歌曲高光段</div>
+      <div style="font-size:13px; color:var(--text-mute)">CST 23:00</div>
+    </div>
+  </div>
+
+  <div class="news-item" style="cursor: default;">
+    <div class="news-date">04-05</div>
+    <div>
+      <div style="font-weight:bold">关西时装周</div>
+      <div style="font-size:13px; color:var(--text-mute)">演出时间待定</div>
+    </div>
+  </div>
+
+  <div class="news-item" style="cursor: default;">
+    <div class="news-date">04-06</div>
+    <div>
+      <div style="font-weight:bold">Got Hooked：An Addicitive Symphony概念照3</div>
+      <div style="font-size:13px; color:var(--text-mute)">CST 23:00</div>
+    </div>
+  </div>
+
+  <div class="news-item" style="cursor: default;">
+    <div class="news-date">04-09</div>
+    <div>
+      <div style="font-weight:bold">MV预告2</div>
+      <div style="font-size:13px; color:var(--text-mute)">CST 23:00</div>
+    </div>
+  </div>
+
+  <div class="news-item" style="cursor: default;">
+    <div class="news-date">04-13</div>
+    <div>
+      <div style="font-weight:bold">Got Hooked：An Addicitive Symphony发布音源&MV</div>
+      <div style="font-size:13px; color:var(--text-mute)">6PM（KST）</div>
+    </div>
+  </div>
+
+  <div class="news-item" style="cursor: default;">
+    <div class="news-date">04-26</div>
+    <div>
+      <div style="font-weight:bold">《人气歌谣》ON THE GO</div>
+      <div style="font-size:13px; color:var(--text-mute)">演出时间待定</div>
+    </div>
+  </div>
+
+<div class="news-item" style="cursor: default;">
+    <div class="news-date">05-09</div>
+    <div>
+      <div style="font-weight:bold">KCON 主舞台+随舞</div>
+      <div style="font-size:13px; color:var(--text-mute)">演出时间待定</div>
+    </div>
+  </div>
+
+<div class="news-item" style="cursor: default;">
+    <div class="news-date">05-10</div>
+    <div>
+      <div style="font-weight:bold">KCON X STAGE</div>
+      <div style="font-size:13px; color:var(--text-mute)">演出时间待定</div>
+    </div>
+  </div>
+
+
+</div>
 </section>
 
-    <section class="section" id="direct">
-        <h2 class="section-title">直拍指路</h2>
-        <div class="direct-wrap">
-            <div class="direct-box">
-                <h3>🔥 主打直拍</h3>
-                <ul class="direct-list">
-                    <li><a href="https://www.bilibili.com/" target="_blank">MODYSSEY 主打官方直拍</a></li>
-                    <li><a href="https://www.bilibili.com/" target="_blank">音乐银行直拍</a></li>
-                    <li><a href="https://www.bilibili.com/" target="_blank">人气歌谣直拍</a></li>
-                </ul>
-            </div>
-            <div class="direct-box">
-                <h3>⭐ 经典舞台</h3>
-                <ul class="direct-list">
-                    <li><a href="https://www.bilibili.com/" target="_blank">Boys Planet 直拍</a></li>
-                    <li><a href="https://www.bilibili.com/" target="_blank">Solo 舞蹈直拍</a></li>
-                    <li><a href="https://www.bilibili.com/" target="_blank">演唱会高清直拍</a></li>
-                </ul>
-            </div>
-        </div>
-    </section>
+  <footer>
+    <p class="footer-copy">© 2026 ZEPHYR FANBASE | 仅供粉丝交流使用</p>
+  </footer>
 
-    <section class="section" id="news">
-        <h2 class="section-title">最新动态</h2>
-        <div class="news-list">
-            <div class="news-item" onclick="window.open('https://weibo.com/','_blank')" style="cursor:pointer">
-                <div class="news-date">2026.03.26</div>
-                <div>
-                    <div style="font-weight:bold">MODYSSEY 全球巡演日程正式开启</div>
-                    <div style="font-size:13px; color:var(--text-mute)">首站定档，李梓豪将带来全新 Solo 舞台</div>
-                </div>
-            </div>
-            <div class="news-item" onclick="window.open('https://space.bilibili.com/','_blank')" style="cursor:pointer">
-                <div class="news-date">NEW</div>
-                <div>
-                    <div style="font-weight:bold">个人舞蹈工作室系列视频更新</div>
-                    <div style="font-size:13px; color:var(--text-mute)">Bilibili 高清同步上线，解锁硬核舞技</div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- ✅ 核心：自动判断设备跳转 B站 -->
+  <script>
+    // 自动判断：电脑→网页版，手机→APP/手机版
+    function goBilibili(webUrl, appUrl) {
+      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+      if (isMobile) {
+        // 手机：优先打开APP
+        window.location.href = appUrl;
+        // 2秒后如果没APP，跳手机版网页
+        setTimeout(() => { window.location.href = webUrl; }, 1500);
+      } else {
+        // 电脑：直接打开网页版
+        window.open(webUrl, '_blank');
+      }
+    }
 
-    <footer>
-        <p class="footer-copy">© 2026 ZEPHYR FANBASE | 仅供粉丝交流使用</p>
-    </footer>
+    // 微博跳转
+    function goWeibo(url) {
+      const isMobile = /Android|iPhone/i.test(navigator.userAgent);
+      if (isMobile) {
+        window.location.href = "sinaweibo://url?url=" + encodeURIComponent(url);
+        setTimeout(() => { window.open(url, '_blank'); }, 1500);
+      } else {
+        window.open(url, '_blank');
+      }
+    }
 
-    <script>
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('reveal');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.section').forEach(section => {
-            observer.observe(section);
-        });
-    </script>
+    // 淡入动画
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('reveal');
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.section').forEach(s => observer.observe(s));
+  </script>
 </body>
 </html>
