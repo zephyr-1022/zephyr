@@ -53,6 +53,8 @@ input,textarea{
     font-size:16px;
     outline:none;
     -webkit-appearance:none;
+    appearance: none;
+    
 }
 
 textarea{
@@ -70,6 +72,7 @@ button{
     font-weight:bold;
     cursor:pointer;
     -webkit-appearance:none;
+    appearance: none;
 }
 
 .export-btn{
@@ -102,7 +105,7 @@ button{
 
 <body>
 <div class="head">
-  <a href="index.html" class="back">← 返回主页</a>
+  <a href=" " class="back">← 返回主页</a >
 </div>
 
 <h1 class="title">💌 粉丝留言板</h1>
@@ -112,7 +115,7 @@ button{
   <textarea id="content" placeholder="请输入你想说的话..."></textarea>
   <button onclick="submitMsg()">提交留言</button>
   <button class="export-btn" onclick="exportMsg()">导出留言（仅管理员）</button>
-  <p id="tip"></p>
+  <p id="tip"></p >
 </div>
 
 <script>
