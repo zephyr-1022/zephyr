@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZEPHYR 李梓豪 | MODYSSEY</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="new.css">
 </head>
 <body>
 
@@ -24,6 +24,8 @@
         <a href="#message">粉丝留言</a>
     </div>
 </nav>
+
+
 
 <section class="hero-banner" id="home">
     <p class="hero-sub">MODYSSEY | BOYSTORY</p>
@@ -65,6 +67,59 @@
         </div>
     </div>
 </section>
+
+<!-- 梓豪回归倒计时 -->
+<div style="
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 20px;
+  background: rgba(26,26,26,0.5);
+  border: 1px solid rgba(157,114,255,0.3);
+  border-radius: 20px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+">
+  <div style="font-size: 16px; color: #9D72FF; font-weight: bold; margin-bottom: 10px;">
+    🕒 距离新歌发布倒计时
+  </div>
+  <div style="font-size: 14px; color: #fff; margin-bottom: 14px;">
+    Got Hooked: An Addictive Symphony
+  </div>
+  <div id="countdown" style="
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+  "></div>
+</div>
+
+<script>
+// 倒计时目标时间：2026-04-13 18:00（KST）
+function countDown() {
+  const end = new Date('2026-04-13 17:00:00').getTime();
+  const now = new Date().getTime();
+  const diff = end - now;
+
+  const d = Math.floor(diff / (1000*60*60*24));
+  const h = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+  const m = Math.floor((diff % (1000*60*60)) / (1000*60));
+  const s = Math.floor((diff % (1000*60)) / 1000);
+
+  document.getElementById('countdown').innerHTML = `
+    <span style="background:#9D72FF; padding:6px 10px; border-radius:10px;">${d}天</span>
+    <span style="background:#9D72FF; padding:6px 10px; border-radius:10px;">${h}时</span>
+    <span style="background:#9D72FF; padding:6px 10px; border-radius:10px;">${m}分</span>
+    <span style="background:#9D72FF; padding:6px 10px; border-radius:10px;">${s}秒</span>
+  `;
+}
+
+setInterval(countDown, 1000);
+countDown();
+</script>
+
+
 
 <section class="section" id="works">
     <h2 class="section-title">作品专区</h2>
@@ -259,6 +314,17 @@
     </div>
   </section>
 </section>
+
+<!-- 抽卡机跳转按钮 -->
+<div style="text-align:center; margin: 30px 0;">
+  <button onclick="location.href='draw.html'" 
+          style="background:linear-gradient(90deg,#a855f7,#7c3aed);
+                 color:#fff; border:none; padding:14px 32px;
+                 border-radius:14px; font-size:17px; font-weight:bold;
+                 cursor:pointer; box-shadow:0 0 20px rgba(168,85,247,0.3);">
+    💫 进入真爱抽卡机
+  </button>
+</div>
 
 <footer>
     <p class="footer-copy">© 2026 ZEPHYR FANBASE | 仅供粉丝交流使用</p>
