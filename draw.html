@@ -3,161 +3,310 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>谁是赌狗</title>
+<title>赌狗模拟器</title>
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,"Microsoft YaHei",sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, "Microsoft YaHei", sans-serif;
 }
-body{
-    background:#121212;
-    color:#fff;
-    padding:20px;
-    min-height:100vh;
-    text-align:center;
+body {
+    background: #121212;
+    color: #fff;
+    padding: 15px;
+    min-height: 100vh;
+    text-align: center;
 }
-.title{
-    font-size:26px;
-    color:#a855f7;
-    margin:30px 0 10px;
+.title {
+    font-size: 22px;
+    color: #a855f7;
+    margin: 20px 0 8px;
 }
-.sub{
-    color:#aaa;
-    margin-bottom:30px;
+.sub {
+    color: #aaa;
+    font-size: 14px;
+    margin-bottom: 20px;
 }
-.card-box{
-    max-width:280px;
-    height:360px;
-    margin:0 auto;
-    background:#1a1a1a;
-    border:2px solid #333;
-    border-radius:20px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-    gap:15px;
-    padding:20px;
-    transition:0.3s;
-    position:relative;
-    overflow:hidden;
+
+/* 抽卡卡片 */
+.card-box {
+    max-width: 280px;
+    height: 360px;
+    margin: 0 auto;
+    background: #1a1a1a;
+    border: 2px solid #333;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+    padding: 15px;
+    transition: 0.3s;
+    position: relative;
+    overflow: hidden;
 }
-/* 抽卡闪光特效 */
-.card-box::before{
-    content:'';
-    position:absolute;
-    top:0;
-    left:-100%;
-    width:100%;
-    height:100%;
-    background:linear-gradient(90deg,transparent,rgba(168,85,247,0.2),transparent);
-    transition:0.6s;
+.card-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(168,85,247,0.2), transparent);
+    transition: 0.6s;
 }
-.card-box.active::before{
-    left:100%;
+.card-box.active::before { left: 100%; }
+.card-box.active {
+    border-color: #a855f7;
+    box-shadow: 0 0 20px rgba(168,85,247,0.4);
+    animation: shake 0.4s ease;
 }
-.card-box.active{
-    border-color:#a855f7;
-    box-shadow:0 0 30px rgba(168,85,247,0.5);
-    animation: shake 0.5s ease;
-}
-/* 卡片翻转动画 */
 @keyframes flipIn {
-    0%{transform:rotateY(90deg); opacity:0;}
-    100%{transform:rotateY(0); opacity:1;}
+    0% { transform: rotateY(90deg); opacity: 0; }
+    100% { transform: rotateY(0); opacity: 1; }
 }
 @keyframes shake {
-    0%,100%{transform:translateX(0);}
-    25%{transform:translateX(-5px);}
-    75%{transform:translateX(5px);}
+    0%,100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
 }
-.card-img{
-    width:200px;
-    height:250px;
-    object-fit:cover;
-    border-radius:12px;
-    animation: flipIn 0.6s ease forwards;
+.card-img {
+    width: 200px;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 10px;
+    animation: flipIn 0.5s ease forwards;
 }
-.card-name{
-    font-size:16px;
-    font-weight:bold;
-    color:#fff;
-    animation: fadeIn 0.8s ease forwards;
+.card-name {
+    font-size: 17px;
+    font-weight: bold;
+    animation: fadeIn 0.7s forwards;
 }
-.card-rarity{
-    padding:4px 10px;
-    background:#a855f7;
-    color:#fff;
-    border-radius:99px;
-    font-size:12px;
-    animation: fadeIn 0.8s ease forwards;
+.card-rarity {
+    padding: 3px 8px;
+    background: #a855f7;
+    border-radius: 99px;
+    font-size: 11px;
+    animation: fadeIn 0.7s forwards;
 }
 @keyframes fadeIn {
-    from{opacity:0; transform:translateY(10px);}
-    to{opacity:1; transform:translateY(0);}
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
 }
-.btn{
-    margin-top:30px;
-    padding:16px 40px;
-    background:linear-gradient(90deg,#a855f7,#7c3aed);
-    color:#fff;
-    border:none;
-    border-radius:14px;
-    font-size:18px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:0.3s;
-    box-shadow:0 0 20px rgba(168,85,247,0.3);
+
+.btn {
+    margin-top: 20px;
+    padding: 12px 30px;
+    background: linear-gradient(90deg, #a855f7, #7c3aed);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
 }
-.btn:hover{
-    transform:scale(1.05);
-    box-shadow:0 0 30px rgba(168,85,247,0.5);
+.btn:active { transform: scale(0.97); }
+
+.back {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    color: #a855f7;
+    text-decoration: none;
+    font-size: 14px;
 }
-.btn:active{
-    transform:scale(0.95);
+
+/* 分页 */
+.tabs {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin: 30px 0 10px;
 }
-.tip{
-    margin-top:15px;
-    color:#888;
-    font-size:14px;
+.tab {
+    padding: 8px 12px;
+    background: #222;
+    border: 1px solid #444;
+    border-radius: 10px;
+    font-size: 14px;
+    cursor: pointer;
 }
-.back{
-    position:absolute;
-    top:20px;
-    left:20px;
-    color:#a855f7;
-    text-decoration:none;
-    font-size:16px;
+.tab.active {
+    background: #a855f7;
+    border-color: #a855f7;
+    color: #fff;
+}
+
+/* 进度文字 */
+.progress-text {
+    font-size: 14px;
+    color: #ccc;
+    margin-bottom: 15px;
+}
+
+/* 图鉴一行4个 */
+.collection {
+    max-width: 340px;
+    margin: 0 auto;
+}
+.collection-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+.collection-item {
+    aspect-ratio: 1 / 1;
+    background: #222;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 10px;
+    color: #666;
+    border: 1px solid #333;
+    overflow: hidden;
+}
+.collection-item.unlocked {
+    border-color: #a855f7;
+    color: #fff;
+}
+.collection-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+}
+.collection-item.unlocked img {
+    display: block;
+}
+.collection-item .lock {
+    display: block;
+}
+.collection-item.unlocked .lock {
+    display: none;
 }
 </style>
 </head>
 
 <body>
+
 <a href=" " class="back">← 返回主页</a >
-<h1 class="title">赌狗模拟器</h1>
-<p class="sub">开赌！</p >
+<h1 class="title">💫 赌狗模拟器</h1>
+<p class="sub">谁是赌狗</p >
 
 <div class="card-box" id="cardBox">
-    <span id="emptyText">点击下方开始抽卡</span>
+    <span id="emptyText">点击开始抽卡</span>
     <img class="card-img" id="cardImg" style="display:none;">
-    <div class="card-rarity" id="rarity" style="display:none;">SSR 稀有</div>
-    <div class="card-name" id="cardName" style="display:none;">李梓豪</div>
+    <div class="card-rarity" id="rarity" style="display:none;">SSR</div>
+    <div class="card-name" id="cardName" style="display:none;">名称</div>
 </div>
 
-<button class="btn" onclick="draw()">✨ 立即开赌</button>
-<p class="tip">祝你一发入魂 💜</p >
+<button class="btn" onclick="draw()">✨ 立即抽卡</button>
+
+<!-- 分页 + 进度 -->
+<div class="tabs">
+    <div class="tab active" onclick="showTab('R')">R</div>
+    <div class="tab" onclick="showTab('SR')">SR</div>
+    <div class="tab" onclick="showTab('SSR')">SSR</div>
+</div>
+
+<div class="progress-text" id="progress-text">进度：0/0</div>
+
+<div class="collection">
+    <div class="collection-grid" id="collection-grid"></div>
+</div>
 
 <script>
-// 本地图片版 —— 图片和draw.html放在同一文件夹
+// 卡池
 const cards = [
-    { name: "舞台限定",  url: "1.jpg",  rarity: "SSR", color: "#a855f7" },
-    { name: "日常可爱",  url: "2.jpg",  rarity: "SR",  color: "#7c3aed" },
-    { name: "练习室抓拍",url: "3.jpg",  rarity: "R",   color: "#6366f1" },
-    { name: "生日特别卡",url: "4.jpg",  rarity: "SSR", color: "#a855f7" }
+    { id: 1, name: "舞台限定",    url: "img/1.jpg", rarity: "SSR" },
+    { id: 2, name: "日常可爱",    url: "img/2.jpg", rarity: "SR"  },
+    { id: 3, name: "练习室抓拍",  url: "img/3.jpg", rarity: "R"   },
+    { id: 4, name: "生日特别卡",  url: "img/4.jpg", rarity: "SSR" },
+    { id: 5, name: "舞台花絮01",  url: "img/5.jpg", rarity: "SR"  },
+    { id: 6, name: "自拍小卡01",  url: "img/6.jpg", rarity: "R"   },
+    { id: 7, name: "签售限定",    url: "img/7.jpg", rarity: "SSR" },
+    { id: 8, name: "机场饭拍",    url: "img/8.jpg", rarity: "SR"  },
+    { id: 9, name: "机场饭拍",    url: "img/9.jpg", rarity: "SR"  },
+    { id: 10, name: "机场饭拍",    url: "img/10.jpg", rarity: "SR"  },
+    { id: 11, name: "机场饭拍",    url: "img2/11.jpg", rarity: "SR"  },
+    { id: 12, name: "机场饭拍",    url: "img2/12.jpg", rarity: "SR"  },
+    { id: 13, name: "机场饭拍",    url: "img2/13.jpg", rarity: "SR"  },
+    { id: 14, name: "机场饭拍",    url: "img2/14.jpg", rarity: "SR"  },
+    { id: 15, name: "机场饭拍",    url: "img2/15.jpg", rarity: "SR"  },
+    { id: 16, name: "机场饭拍",    url: "img2/16.jpg", rarity: "SR"  },
+    { id: 17, name: "机场饭拍",    url: "img2/17.jpg", rarity: "SR"  },
+    { id: 18, name: "机场饭拍",    url: "img2/18.jpg", rarity: "SR"  },
+    { id: 19, name: "机场饭拍",    url: "img2/19.jpg", rarity: "SR"  },
+    { id: 20, name: "机场饭拍",    url: "img2/20.jpg", rarity: "SR"  },
+    { id: 21, name: "机场饭拍",    url: "img3/21.jpg", rarity: "SR"  },
+    { id: 22, name: "机场饭拍",    url: "img3/22.jpg", rarity: "SR"  },
+    { id: 23, name: "机场饭拍",    url: "img3/23.jpg", rarity: "SR"  },
+    { id: 24, name: "机场饭拍",    url: "img3/24.jpg", rarity: "SR"  },
+    { id: 25, name: "机场饭拍",    url: "img3/25.jpg", rarity: "SR"  },
+    { id: 26, name: "机场饭拍",    url: "img3/26.jpg", rarity: "SR"  },
+    { id: 27, name: "机场饭拍",    url: "img3/27.jpg", rarity: "SR"  },
+    { id: 28, name: "机场饭拍",    url: "img3/28.jpg", rarity: "SR"  },
+    { id: 29, name: "机场饭拍",    url: "img3/29.jpg", rarity: "SR"  },
+    { id: 30, name: "机场饭拍",    url: "img3/30.jpg", rarity: "SR"  },
+    { id: 31, name: "机场饭拍",    url: "img4/31.jpg", rarity: "SR"  },
+    { id: 32, name: "机场饭拍",    url: "img4/32.jpg", rarity: "SR"  },
+    { id: 33, name: "机场饭拍",    url: "img4/33.jpg", rarity: "SR"  },
+    { id: 34, name: "机场饭拍",    url: "img4/34.jpg", rarity: "SR"  },
+    { id: 35, name: "机场饭拍",    url: "img4/35.jpg", rarity: "SR"  },
+    { id: 36, name: "机场饭拍",    url: "img4/36.jpg", rarity: "SR"  },
+    
 ];
 
+// 收集记录
+let collected = JSON.parse(localStorage.getItem("zephyr_cards")) || [];
+let currentTab = "R";
+
+// 切换分页
+function showTab(rarity) {
+    currentTab = rarity;
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    [...document.querySelectorAll(".tab")].find(t => t.innerText === rarity).classList.add("active");
+    renderCollection();
+}
+
+// 渲染图鉴 + 进度
+function renderCollection() {
+    const grid = document.getElementById("collection-grid");
+    const progressText = document.getElementById("progress-text");
+    grid.innerHTML = "";
+
+    const list = cards.filter(c => c.rarity === currentTab);
+    const total = list.length;
+    const own = list.filter(c => collected.includes(c.id)).length;
+
+    progressText.innerText = `${currentTab} 进度：${own}/${total}`;
+
+    list.forEach(card => {
+        const item = document.createElement("div");
+        item.className = "collection-item";
+        const isUnlocked = collected.includes(card.id);
+
+        if (isUnlocked) {
+            const img = document.createElement("img");
+            img.src = card.url;
+            item.appendChild(img);
+        }
+
+        const lock = document.createElement("div");
+        lock.className = "lock";
+        lock.innerText = isUnlocked ? "✅" : "🔒";
+        item.appendChild(lock);
+
+        if (isUnlocked) item.classList.add("unlocked");
+        grid.appendChild(item);
+    });
+}
+
+// 抽卡
 function draw() {
     const box = document.getElementById("cardBox");
     const img = document.getElementById("cardImg");
@@ -165,33 +314,35 @@ function draw() {
     const rarity = document.getElementById("rarity");
     const emptyText = document.getElementById("emptyText");
 
-    // 先隐藏旧卡片，重置状态
     img.style.display = "none";
     name.style.display = "none";
     rarity.style.display = "none";
     emptyText.style.display = "block";
     box.classList.remove("active");
 
-    // 触发震动+闪光动画
-    setTimeout(() => {
-        box.classList.add("active");
-    }, 100);
+    setTimeout(() => box.classList.add("active"), 80);
 
-    // 600ms后显示新卡片
     setTimeout(() => {
-        let card = cards[Math.floor(Math.random() * cards.length)];
-
+        const card = cards[Math.floor(Math.random() * cards.length)];
         img.src = card.url;
-        rarity.innerText = card.rarity + " 稀有";
-        rarity.style.background = card.color;
         name.innerText = card.name;
+        rarity.innerText = card.rarity;
 
         img.style.display = "block";
         name.style.display = "block";
         rarity.style.display = "block";
         emptyText.style.display = "none";
-    }, 600);
+
+        if (!collected.includes(card.id)) {
+            collected.push(card.id);
+            localStorage.setItem("zephyr_cards", JSON.stringify(collected));
+            renderCollection();
+        }
+    }, 500);
 }
+
+// 初始化
+renderCollection();
 </script>
 </body>
 </html>
